@@ -11,7 +11,7 @@ Timebox:
 4. Tutorial Content
 5. Further Reading, References links, etc...
 
-### Tutorial
+### Tutorial Content
 1. Introduce Confluent KSQL data generator, explain custom data capabilities
 1. Show the example data gen stock quote schema (see stockquote_scheam.avro)
 1. Instruct how to run stock quote data generator in a free terminal
@@ -31,4 +31,15 @@ Timebox:
 1. Show how to use the UDAF EMA function which, in turn, calls the VWAP function, to create an exponential moving average of the volume weight average of the stock prices.
 1. Show a diagram of the components and their interactions with maybe a brief explanation of how the KSQL commands compile down into KStreams applications.
 1. Provide links to existing KSQL documentation and explain how the Stock Ticker keyed data could be used in a TABLE to build a stateful store of current VWAP prices by ticker
+
+### Value of Tutorial
+* The aim of this tutorial is to get a reader from zero to functioning UDF example in 30 minutes or less with a realistic use case.  This provides value by curating developer productivity and aims to reduce developer frustration with the tools. 
+* This tutorial narrows in on the UDF functions in KSQL which provides deep value to customers with extraordinary business logic.  This excercise shows that value by 'stringing' together both the UDF and UDAF capabilities into a single 'SELECT' statement using custom functions which Confluent would likely never build or deploy on their own.
+* Financial companies, in particular, have a lot of proprietary or custom business logic.  This tutorial 'speaks the language' of developers in this space, more so than the typical 'web developer' tutorials in the current Confluent asset list.  This is valuable as a use case for a wide set of potential customers which, in my experience, have been slow to adopt event stream processing technologies.
+* Simulated data in the financial space is critical for test systems.  The existing data generation tools are a compelling tool for a very rapid prototype of how a financial company could utilize the confluent platform.  I have some ideas on how the Avro generation tooling could be improved to more closely mimic things like financial transactions.
+
+### Tool exposure
+* This tutorial exposes the reader to Confluents efforts to build developer friendly tools.  Bootstrapping an environment with 'life like' data is key in my opinion.  This tutorial aims to exemplify the possiblity of adding that to their workflow w/ the Confluent tools by showcasing the data generation tool _with_ a custom schema.
+* The bulk of this tutorial is mean to showcase the UDF and UDAF functions in KSQL which add obvious value add to any business that has non-trival business logic use cases.
+* Expose the reader further to the KSQL command line. 
 
