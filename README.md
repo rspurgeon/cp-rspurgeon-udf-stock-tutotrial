@@ -45,3 +45,9 @@ Timebox:
 * The handy Kafkacat tool
 
 [View the WIP tutorial](TUTORIAL.md)
+
+### TODO
+There are lots of things clearly I couldn't get to.
+* Finish the UDAF function and add to tutorial
+* Add a diagram so reader can understand how the various components interact
+* proof read :/
