@@ -138,6 +138,90 @@ public class VwapUdf {
   * `confluent stop ksql-server`
   * `confluent start ksq-server` 
   
+##### Step 4: Transform the Stream with KSQL
+Launch the KSQL CLI
+```$xslt
+➜ ksql
+
+                  ===========================================
+                  =        _  __ _____  ____  _             =
+                  =       | |/ // ____|/ __ \| |            =
+                  =       | ' /| (___ | |  | | |            =
+                  =       |  <  \___ \| |  | | |            =
+                  =       | . \ ____) | |__| | |____        =
+                  =       |_|\_\_____/ \___\_\______|       =
+                  =                                         =
+                  =  Streaming SQL Engine for Apache Kafka® =
+                  ===========================================
+
+Copyright 2017-2018 Confluent Inc.
+
+CLI v5.2.1, Server v5.2.1 located at http://localhost:8088
+
+Having trouble? Type 'help' (case-insensitive) for a rundown of how things work!
+
+ksql>
+```
+
+Show the available topics
+```$xslt
+ksql> show topics;
+
+ Kafka Topic                                                                                   | Registered | Partitions | Partition Replicas | Consumers | ConsumerGroups
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+...
+ stockquotes                                                                                   | false      | 1          | 1                  | 0         | 0
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+```
+
+View the 'raw' stock quote data
+```$xslt
+ksql> print 'stockquotes';
+Format:JSON
+{"ROWTIME":1555086127774,"ROWKEY":"TICKER_E","ticker":"TICKER_E","bid":15,"ask":72,"bidQty":70,"askQty":46}
+{"ROWTIME":1555086128165,"ROWKEY":"TICKER_E","ticker":"TICKER_E","bid":30,"ask":61,"bidQty":86,"askQty":95}
+{"ROWTIME":1555086128223,"ROWKEY":"TICKER_D","ticker":"TICKER_D","bid":4,"ask":71,"bidQty":88,"askQty":35}
+{"ROWTIME":1555086128639,"ROWKEY":"TICKER_D","ticker":"TICKER_D","bid":5,"ask":94,"bidQty":51,"askQty":19}
+^CTopic printing ceased
+```
+
+Create a stock quote stream specifying the `stockquote` topic and that our stream will be in JSON format
+```$xslt
+ksql> create stream quote_stream(ticker varchar, bid int, ask int, bidqty int, askqty int) with (kafka_topic='stockquotes', value_format='json');
+
+ Message
+----------------
+ Stream created
+----------------
+```
+
+View the quote_stream stream:
+```$xslt
+ksql> select * from quote_stream;
+1555086272719 | TICKER_E | TICKER_E | 45 | 89 | 18 | 92
+1555086273140 | TICKER_E | TICKER_E | 4 | 82 | 84 | 33
+1555086273458 | TICKER_A | TICKER_A | 3 | 64 | 57 | 72
+1555086273479 | TICKER_E | TICKER_E | 49 | 90 | 53 | 57
+^C1555086273508 | TICKER_C | TICKER_C | 13 | 67 | 34 | 20
+Query terminated
+```
+
+Transform the prices into VWAP with the custom UDF function
+```$xslt
+ksql> select TICKER, vwap(BID, ASK, BIDQTY, ASKQTY) FROM quote_stream LIMIT 5;
+TICKER_B | 24.0
+TICKER_B | 38.0
+TICKER_E | 18.0
+TICKER_C | 11.0
+TICKER_D | 33.0
+Limit Reached
+Query terminated
+```
+
+##### Step 5: Implement a stateful UDAF function
+todo: do this
+
+
 #### Next Steps
 KSQL and UDF provide a wonderful high level abstraction for rapid building of custom streaming applications.  For
 applications that require even more flexibility dig into Kafka Streams (link).
