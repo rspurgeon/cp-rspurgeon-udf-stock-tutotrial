@@ -1,0 +1,55 @@
+{
+  "namespace": "ksql",
+  "name": "stockquote",
+  "type": "record",
+  "fields": [
+    {"name": "ticker", "type": {
+        "type": "string",
+        "arg.properties": {
+            "options": [
+							"TICKER_A",
+							"TICKER_B",
+							"TICKER_C",
+							"TICKER_D",
+							"TICKER_E"
+						] 
+        }
+    }},
+    {"name": "bid", "type": {
+        "type": "int",
+        "arg.properties": {
+					"range": {
+						"min": 1,
+						"max": 50
+					}
+        }
+    }},
+    {"name": "ask", "type": {
+        "type": "int",
+        "arg.properties": {
+					"range": {
+						"min": 51,
+						"max": 100 
+					}
+        }
+    }},
+    {"name": "bidQty", "type": {
+        "type": "int",
+        "arg.properties": {
+					"range": {
+						"min": 1,
+						"max": 100 
+					}
+        }
+    }},
+    {"name": "askQty", "type": {
+        "type": "int",
+        "arg.properties": {
+					"range": {
+						"min": 1,
+						"max": 100 
+					}
+        }
+    }}
+  ]
+}
