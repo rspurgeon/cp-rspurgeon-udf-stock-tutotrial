@@ -42,4 +42,6 @@ Timebox:
 * This tutorial exposes the reader to Confluents efforts to build developer friendly tools.  Bootstrapping an environment with 'life like' data is key in my opinion.  This tutorial aims to exemplify the possiblity of adding that to their workflow w/ the Confluent tools by showcasing the data generation tool _with_ a custom schema.
 * The bulk of this tutorial is mean to showcase the UDF and UDAF functions in KSQL which add obvious value add to any business that has non-trival business logic use cases.
 * Expose the reader further to the KSQL command line. 
+* The handy Kafkacat tool
 
+[View the WIP tutorial](TUTORIAL.md)
