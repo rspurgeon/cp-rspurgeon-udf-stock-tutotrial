@@ -223,6 +223,12 @@ todo: do this part
 
 [See example Exponential Moving Average Example](src/main/java/io/confluent/tutorials/udf/EmaUdaf.java)
 
+##### Step 5: Implement a stateful UDAF function
+todo: show how one would string together the UDF and UDAF together in a single select, something like:
+```$xslt
+select TICKER, ema(vwap(BID, ASK, BIDQTY, ASKQTY)) FROM quote_stream LIMIT 5;
+```
+
 #### Next Steps
 KSQL and UDF provide a wonderful high level abstraction for rapid building of custom streaming applications.  For
 applications that require even more flexibility dig into Kafka Streams (link).
