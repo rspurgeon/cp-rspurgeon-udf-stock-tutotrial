@@ -133,7 +133,7 @@ public class VwapUdf {
 ```
 
 * Using your build tool create a JAR that includes the VWAP UDF function and any depenendencies.
-* Copy the JAR to the Confluent Platform extensions folder in the Confluent install root (default: `<confluent-install-path>\ext`)
+* Copy the JAR to the Confluent Platform extensions folder in the Confluent install root (default: `<confluent-install-path>/ext`)
 * Restart KSQL
   * `confluent stop ksql-server`
   * `confluent start ksq-server` 
