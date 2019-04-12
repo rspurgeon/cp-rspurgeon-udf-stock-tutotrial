@@ -219,8 +219,9 @@ Query terminated
 ```
 
 ##### Step 5: Implement a stateful UDAF function
-todo: do this
+todo: do this part
 
+[See example Exponential Moving Average Example](src/main/java/io/confluent/tutorials/udf/EmaUdaf.java)
 
 #### Next Steps
 KSQL and UDF provide a wonderful high level abstraction for rapid building of custom streaming applications.  For
